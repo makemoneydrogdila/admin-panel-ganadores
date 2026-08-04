@@ -1,0 +1,81 @@
+
+
+@font-face {
+  font-family: 'Arimo';
+  src: url("../fonts/arimo/arimo-regular-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/arimo/arimo-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/arimo/arimo-regular-webfont.woff") format("woff"), url("../fonts/arimo/arimo-regular-webfont.ttf") format("truetype"), url("../fonts/arimo/arimo-regular-webfont.svg") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arimo-bold';
+  src: url("../fonts/arimo/arimo-bold-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/arimo/arimo-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/arimo/arimo-bold-webfont.woff") format("woff"), url("../fonts/arimo/arimo-bold-webfont.ttf") format("truetype"), url("../fonts/arimo/arimo-bold-webfont.svg") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arimo-italic';
+  src: url("../fonts/arimo/arimo-italic-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/arimo/arimo-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/arimo/arimo-italic-webfont.woff2") format("woff2"), url("../fonts/arimo/arimo-italic-webfont.woff") format("woff"), url("../fonts/arimo/arimo-italic-webfont.ttf") format("truetype"), url("../fonts/arimo/arimo-italic-webfont.svg#arimoitalic") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'icon_font_bc';
+  src: url("../fonts/iconfont/icon_font_bc.eot?61jkgi");
+  src: url("../fonts/iconfont/icon_font_bc.eot?61jkgi#iefix") format("embedded-opentype"), url("../fonts/iconfont/icon_font_bc.ttf?61jkgi") format("truetype"), url("../fonts/iconfont/icon_font_bc.woff?61jkgi") format("woff"), url("../fonts/iconfont/icon_font_bc.svg?61jkgi#icon_font_bc") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CIBFontSans-bold';
+  src: url("../fonts/opensans/CIBFontSans-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CIBFontSans';
+  src: url("../fonts/opensans/CIBFontSans-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CIBFontSerif-Bold';
+  src: url("../fonts/opensans/CIBFontSerif-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans-Bold';
+  src: url("../fonts/opensans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url("../fonts/opensans/OpenSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: url("../fonts/opensans/OpenSans-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,0 +1,33 @@
+:root {
+  --bg-lineas-image: url('../assets/img/lineas.svg');
+  --bg-lineas-opacity: 0.22;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  z-index: 0;
+  isolation: isolate; /* keep background overlay behind content */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -6% -4%; /* bleed a bit to avoid edges */
+  background: var(--bg-lineas-image) center/cover no-repeat;
+  opacity: var(--bg-lineas-opacity);
+  pointer-events: none;
+  z-index: -1;
+  filter: saturate(1.05);
+}
+
+@media (max-width: 640px) {
+  body::before {
+    inset: -10% -8%;
+    opacity: 0.28;
+    background-size: 140%;
+  }
+}

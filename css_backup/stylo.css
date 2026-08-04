@@ -1,0 +1,144 @@
+/* === Fondo general === */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f8f7f3, #e8dfc3);
+  color: #222;
+}
+
+/* === Contenedor principal === */
+.verification-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* === Tarjeta superior === */
+.top-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.top-card:hover {
+  transform: translateY(-4px);
+}
+
+.logo {
+  width: 130px;
+  margin-bottom: 10px;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Sección inferior === */
+.bottom-section {
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2d2d2d;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* === Inputs de verificación === */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.digit-input {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 1.6rem;
+  border: 2px solid #dcd3b4;
+  border-radius: 12px;
+  outline: none;
+  background: #fff;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #2a2a2a;
+}
+
+.digit-input:focus {
+  border-color: #c8b365;
+  box-shadow: 0 0 6px rgba(200, 179, 101, 0.4);
+}
+
+/* === Botón === */
+.btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 12px;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.btn.active {
+  background: linear-gradient(135deg, #f7d96b, #e9c84b);
+  color: #000;
+  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(240, 210, 100, 0.3);
+}
+
+.btn.active:hover {
+  background: linear-gradient(135deg, #f8e07a, #f0d253);
+  transform: translateY(-3px);
+}
+
+/* === Responsivo === */
+@media (max-width: 480px) {
+  .digit-input {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+
+  .logo {
+    width: 350px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+}

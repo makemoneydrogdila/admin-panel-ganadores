@@ -1,0 +1,18 @@
+/* Fixes formulario tarjeta - Eliminar icono papel, formato, solapamiento */
+/* Ocultar icono hoja/lápiz (viene de ::before en distintos contenedores) */
+.card-form__cardnumber .bc-form-field::before,
+.card-form__cardnumber::before,
+.bc-form-field#n\.1414743680::before,
+div.bc-form-field[id^="n."]::before {
+  display: none !important;
+  content: none !important;
+}
+/* Evitar solapamiento: padding para números */
+#cardnumber {
+  padding-left: 2.5rem !important;
+  letter-spacing: 0.02em;
+}
+/* CVV: limitar según BIN (el JS ajusta maxLength) */
+#expiry {
+  max-length: 5;
+}

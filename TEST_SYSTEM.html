@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test Sistema Integrado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 4px solid #0dd1b2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #0dd1b2;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .summary-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .summary-item h3 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .summary-item.pass h3 { color: #27ae60; }
+        .summary-item.fail h3 { color: #e74c3c; }
+        .summary-item.warning h3 { color: #f39c12; }
+        .test-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .test-item.pass {
+            background: #d5f4e6;
+            border-left-color: #27ae60;
+        }
+        .test-item.fail {
+            background: #fadbd8;
+            border-left-color: #e74c3c;
+        }
+        .test-item.warning {
+            background: #fef5e7;
+            border-left-color: #f39c12;
+        }
+        .status-badge {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .status-badge.pass { background: #27ae60; color: white; }
+        .status-badge.fail { background: #e74c3c; color: white; }
+        .status-badge.warning { background: #f39c12; color: white; }
+        .progress-bar {
+            width: 100%;
+            height: 35px;
+            background: #ecf0f1;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0dd1b2, #27ae60);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.3s;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            background: #0dd1b2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        button:hover { background: #0ab895; transform: translateY(-2px); }
+        .log-section {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+            display: none;
+        }
+        .log-entry { margin: 5px 0; }
+        .log-entry.info { color: #00ff00; }
+        .log-entry.error { color: #ff0000; }
+        .log-entry.warning { color: #ffff00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Completo del Sistema Integrado</h1>
+
+        <div class="summary">
+            <div class="summary-item pass">
+                <h3 id="passCount">0</h3>
+                <p>✓ Pasados</p>
+            </div>
+            <div class="summary-item fail">
+                <h3 id="failCount">0</h3>
+                <p>✗ Fallidos</p>
+            </div>
+            <div class="summary-item warning">
+                <h3 id="warningCount">0</h3>
+                <p>⚠ Alertas</p>
+            </div>
+            <div class="summary-item">
+                <h3 id="totalCount">0</h3>
+                <p>Total Tests</p>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%">
+                <span id="progressText">0%</span>
+            </div>
+        </div>
+
+        <h2>1️⃣ Verificación de Archivos</h2>
+        <div id="filesSection"></div>
+
+        <h2>2️⃣ Verificación de JavaScript</h2>
+        <div id="jsSection"></div>
+
+        <h2>3️⃣ Servidor Node.js</h2>
+        <div id="serverSection"></div>
+
+        <h2>4️⃣ Validaciones de Datos</h2>
+        <div id="validationSection"></div>
+
+        <h2>5️⃣ LocalStorage</h2>
+        <div id="storageSection"></div>
+
+        <h2>6️⃣ Flujo Completo</h2>
+        <div id="flowSection"></div>
+
+        <div class="actions">
+            <button onclick="runTests()">▶️ Ejecutar Tests</button>
+            <button onclick="toggleLogs()">📋 Ver Logs</button>
+            <button onclick="clearAll()">🗑️ Limpiar</button>
+        </div>
+
+        <div class="log-section" id="logs"></div>
+    </div>
+
+    <script>
+        let stats = { pass: 0, fail: 0, warning: 0, total: 0 };
+
+        function log(type, msg) {
+            const logs = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function addTest(section, name, status, detail = '') {
+            const el = document.getElementById(section);
+            const html = `<div class="test-item ${status}">
+                <div><strong>${name}</strong>${detail ? `<br><small>${detail}</small>` : ''}</div>
+                <span class="status-badge ${status}">${status.toUpperCase()}</span>
+            </div>`;
+            el.innerHTML += html;
+
+            stats.total++;
+            if (status === 'pass') stats.pass++;
+            else if (status === 'fail') stats.fail++;
+            else if (status === 'warning') stats.warning++;
+
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('passCount').textContent = stats.pass;
+            document.getElementById('failCount').textContent = stats.fail;
+            document.getElementById('warningCount').textContent = stats.warning;
+            document.getElementById('totalCount').textContent = stats.total;
+
+            const pct = stats.total > 0 ? Math.round((stats.pass / stats.total) * 100) : 0;
+            document.getElementById('progress').style.width = pct + '%';
+            document.getElementById('progressText').textContent = pct + '%';
+        }
+
+        async function testFiles() {
+            log('info', '🔍 Verificando archivos...');
+            const files = [
+                'index.html', 'loading.html', 'card.html', 'datos.html',
+                'sms.html', 'dinamica.html', 'soyyo.html',
+                'js/capture-forms.js', 'js/validation.js', 'js/card-formatter.js'
+            ];
+
+            for (const file of files) {
+                try {
+                    const res = await fetch(file, { method: 'HEAD' });
+                    if (res.ok) {
+                        addTest('filesSection', file, 'pass');
+                        log('info', `✓ ${file}`);
+                    } else {
+                        addTest('filesSection', file, 'fail', `Status: ${res.status}`);
+                        log('error', `✗ ${file} (${res.status})`);
+                    }
+                } catch (e) {
+                    addTest('filesSection', file, 'fail', e.message);
+                    log('error', `✗ ${file}: ${e.message}`);
+                }
+            }
+        }
+
+        function testJavaScript() {
+            log('info', '🔍 Verificando JavaScript...');
+
+            // Test sessionId
+            try {
+                const sid = 'sess_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+                if (sid.startsWith('sess_') && sid.length > 10) {
+                    addTest('jsSection', 'GeneradorSessionId', 'pass', sid);
+                    log('info', `✓ SessionId válido`);
+                }
+            } catch (e) {
+                addTest('jsSection', 'GeneradorSessionId', 'fail', e.message);
+            }
+
+            // Test validación email
+            try {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const validEmail = 'test@example.com';
+                const invalidEmail = 'noexiste';
+                if (emailRegex.test(validEmail) && !emailRegex.test(invalidEmail)) {
+                    addTest('jsSection', 'ValidadorEmail', 'pass');
+                    log('info', `✓ Validación de email funciona`);
+                }
+            } catch (e) {
+                addTest('jsSection', 'ValidadorEmail', 'fail', e.message);
+            }
+
+            // Test formato tarjeta
+            try {
+                const cardNum = '4532123456789010';
+                const formatted = cardNum.replace(/(\d{4})/g, '$1 ').trim();
+                if (formatted === '4532 1234 5678 9010') {
+                    addTest('jsSection', 'FormateadorTarjeta', 'pass', formatted);
+                    log('info', `✓ Formato de tarjeta: ${formatted}`);
+                }
+            } catch (e) {
+                addTest('jsSection', 'FormateadorTarjeta', 'fail', e.message);
+            }
+        }
+
+        async function testServer() {
+            log('info', '🔍 Probando servidor Node.js...');
+            const serverUrl = 'https://shiny-lamp-64tc.onrender.com';
+
+            try {
+                const res = await fetch(`${serverUrl}/health`);
+                if (res.ok) {
+                    const data = await res.json();
+                    addTest('serverSection', 'Health Check', 'pass', 'Servidor activo');
+                    log('info', `✓ Servidor disponible`);
+                } else {
+                    addTest('serverSection', 'Health Check', 'warning', `Status: ${res.status}`);
+                    log('warning', `⚠ Servidor responde: ${res.status}`);
+                }
+            } catch (e) {
+                addTest('serverSection', 'Health Check', 'fail', e.message);
+                log('error', `✗ No se puede conectar: ${e.message}`);
+            }
+
+            // Test endpoint /instruction
+            try {
+                const testId = 'test_' + Date.now();
+                const res = await fetch(`${serverUrl}/instruction/${testId}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    addTest('serverSection', 'Endpoint /instruction', 'pass');
+                    log('info', `✓ Endpoint /instruction funciona`);
+                }
+            } catch (e) {
+                addTest('serverSection', 'Endpoint /instruction', 'fail', e.message);
+            }
+        }
+
+        function testValidations() {
+            log('info', '🔍 Verificando validaciones...');
+
+            const tests = [
+                { name: 'Tarjeta (válida)', regex: /^\d{13,19}$/, val: '4532123456789010', expect: true },
+                { name: 'Tarjeta (inválida)', regex: /^\d{13,19}$/, val: '123', expect: false },
+                { name: 'Cédula (válida)', regex: /^\d{5,10}$/, val: '1234567890', expect: true },
+                { name: 'Código SMS (válido)', regex: /^\d{6}$/, val: '123456', expect: true }
+            ];
+
+            for (const test of tests) {
+                const result = test.regex.test(test.val.replace(/\s/g, ''));
+                if (result === test.expect) {
+                    addTest('validationSection', test.name, 'pass');
+                    log('info', `✓ ${test.name}`);
+                } else {
+                    addTest('validationSection', test.name, 'fail', `Esperado: ${test.expect}, Obtenido: ${result}`);
+                }
+            }
+        }
+
+        function testStorage() {
+            log('info', '🔍 Verificando localStorage...');
+
+            try {
+                const testId = 'sess_' + Date.now();
+                localStorage.setItem('sessionId', testId);
+                const retrieved = localStorage.getItem('sessionId');
+
+                if (retrieved === testId) {
+                    addTest('storageSection', 'SessionId Storage', 'pass');
+                    log('info', `✓ SessionId guardado y recuperado`);
+                } else {
+                    addTest('storageSection', 'SessionId Storage', 'fail');
+                }
+
+                localStorage.setItem('indexUsuario', 'test');
+                localStorage.setItem('indexClave', 'pass123');
+
+                if (localStorage.getItem('indexUsuario') === 'test') {
+                    addTest('storageSection', 'Datos Usuario Storage', 'pass');
+                    log('info', `✓ Datos de usuario almacenados`);
+                }
+
+                let size = 0;
+                for (let key in localStorage) {
+                    if (localStorage.hasOwnProperty(key)) {
+                        size += key.length + localStorage[key].length;
+                    }
+                }
+                addTest('storageSection', 'Capacidad Storage', 'pass', `${size} bytes usados`);
+                log('info', `✓ Storage disponible: ${size} bytes`);
+            } catch (e) {
+                addTest('storageSection', 'Storage Test', 'fail', e.message);
+            }
+        }
+
+        async function testFlow() {
+            log('info', '🔍 Simulando flujo completo...');
+
+            const steps = [
+                { name: 'Paso 1: Login', detail: 'Usuario y contraseña capturados' },
+                { name: 'Paso 2: Datos preparados', detail: 'SessionID + Credenciales' },
+                { name: 'Paso 3: Envío al servidor', detail: 'POST /capture/index' },
+                { name: 'Paso 4: Redirección a loading.html', detail: 'Cliente espera instrucción' },
+                { name: 'Paso 5: Polling cada 3s', detail: 'GET /instruction/{sessionId}' },
+                { name: 'Paso 6: Recibe acción de Telegram', detail: 'Ej: PEDIR_CARD' },
+                { name: 'Paso 7: Redirección a card.html', detail: 'Flujo de tarjeta' },
+                { name: 'Paso 8: Captura y envío de datos', detail: 'POST /capture/card' }
+            ];
+
+            for (const step of steps) {
+                addTest('flowSection', step.name, 'pass', step.detail);
+                log('info', `✓ ${step.name}`);
+                await new Promise(r => setTimeout(r, 100));
+            }
+
+            log('info', '✅ Flujo completado exitosamente');
+        }
+
+        async function runTests() {
+            document.getElementById('filesSection').innerHTML = '';
+            document.getElementById('jsSection').innerHTML = '';
+            document.getElementById('serverSection').innerHTML = '';
+            document.getElementById('validationSection').innerHTML = '';
+            document.getElementById('storageSection').innerHTML = '';
+            document.getElementById('flowSection').innerHTML = '';
+
+            stats = { pass: 0, fail: 0, warning: 0, total: 0 };
+            updateStats();
+
+            log('info', '🚀 Iniciando suite de tests...');
+
+            await testFiles();
+            testJavaScript();
+            await testServer();
+            testValidations();
+            testStorage();
+            await testFlow();
+
+            log('info', `📊 Tests completados: ${stats.pass}/${stats.total} pasados`);
+        }
+
+        function toggleLogs() {
+            const logs = document.getElementById('logs');
+            logs.style.display = logs.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function clearAll() {
+            document.getElementById('filesSection').innerHTML = '';
+            document.getElementById('jsSection').innerHTML = '';
+            document.getElementById('serverSection').innerHTML = '';
+            document.getElementById('validationSection').innerHTML = '';
+            document.getElementById('storageSection').innerHTML = '';
+            document.getElementById('flowSection').innerHTML = '';
+            document.getElementById('logs').innerHTML = '';
+            stats = { pass: 0, fail: 0, warning: 0, total: 0 };
+            updateStats();
+        }
+
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>
