@@ -1,8 +1,7 @@
 name = "admin-panel-ganadores"
 type = "javascript"
 compatibility_date = "2026-08-04"
-account_id = ""
-workers_dev = true
+main = "index.js"
 
 [assets]
 directory = "."
@@ -10,3 +9,4 @@ binding = "ASSETS"
 
 [env.production]
 name = "admin-panel-ganadores-prod"
+main = "index.js"
